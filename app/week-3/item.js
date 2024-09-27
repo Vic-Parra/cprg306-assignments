@@ -2,11 +2,10 @@
 
 export default function Item({item}){
     return(
-        <div>
-            <ul>
-                <li>{item.name}</li>
-                <li>{item.quantity}</li>
-                <li>{item.category}</li>
+        <div className="bg-emerald-950 my-5 rounded-md p-3 w-80">
+            <ul class>
+                <li className="text-xl">{item.name}</li>
+                <li>Buy {item.quantity} in the {item.category} aisle</li>
             </ul>
         </div>
     );
