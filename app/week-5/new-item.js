@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function NewItem (){
 
+    // -- Use States --
+
     // quantity use state 
     const [quantity, setQuantity] = useState(1);
 
@@ -11,9 +13,12 @@ export default function NewItem (){
     const [name, setName] = useState("");
 
     // category use state 
-    const [category, setCategory] = useState("produce");
+    const [category, setCategory] = useState("Produce");
 
-    // Counter 
+
+    // -- Functions --
+
+    // Counter Functions
     let btnDisabled = false;
     if (quantity == 1){
         btnDisabled = true;
@@ -37,7 +42,7 @@ export default function NewItem (){
         const item = {
             name,
             quantity,
-            category,
+            category
           };
         
         console.log(item);
@@ -47,44 +52,65 @@ export default function NewItem (){
         alert(`${quantity} ${name} from ${category} added to list!`);
     };
 
+    // -- Styles --
+
+    // Active Button Style
+    const btnStyle = "text-black bg-red-400 w-6 m-2 hover:bg-red-600";
+
+    // Submit Button Style
+    const submitStyle = "text-black bg-red-400 border-double border-white";
+
+    // Input Field Style
+    const inputStyle = "text-black bg-red-200"
+
+
+
 return(
-    <div >
-        <form >
-            <input 
-            type = "text"
-            value = {name}
-            placeholder="Item Name"
-            onChange = {(e) => setName(e.target.value)}
-            required
-            />
+    <div>
+            <form onSubmit={handleSubmit} >
+                <input 
+                required
+                type = "text"
+                value = {name}
+                placeholder="Item Name"
+                onChange = {(e) => setName(e.target.value)}
+                className={inputStyle}
+                />
 
-            <p>Quantity: {quantity}</p>
-            <button 
-            className="text-black bg-slate-400 w-6 m-4" 
-            disabled={btnDisabled} 
-            onClick={decrement}>-</button>
+                <div>
+                    <p>Quantity: {quantity}</p>
+                    <button 
+                    type="button"
+                    className={btnStyle}
+                    disabled={btnDisabled} 
+                    onClick={decrement}>-</button>
 
-            <button 
-            className="text-black bg-slate-400 w-6 m-4" 
-            onClick={increment}>+</button>
+                    <button 
+                    type="button"
+                    className = {btnStyle} 
+                    onClick={increment}>+</button>
+                </div>
 
-            <select>
-                <option value="produce">Produce</option>
-                <option value="dairy">Dairy</option>
-                <option value="bakery">Bakery</option>
-                <option value="meat">Meat</option>
-                <option value="frozenFoods">Frozen Foods</option>
-                <option value="cannedGoods">Canned Goods</option>
-                <option value="dryGoods">Dry Goods</option>
-                <option value="beverages">Beverages</option>
-                <option value="snacks">Snacks</option>
-                <option value="household">Household</option>
-                <option value="other">Other</option>
-            </select>
+                <select 
+                onChange = {(event) => setCategory(event.target.value)} 
+                value={category}
+                className={inputStyle}
+                >
+                    <option value="Produce">Produce</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Bakery">Bakery</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Frozen Foods">Frozen Foods</option>
+                    <option value="Canned Goods">Canned Goods</option>
+                    <option value="Dry Goods">Dry Goods</option>
+                    <option value="Beverages">Beverages</option>
+                    <option value="Snacks">Snacks</option>
+                    <option value="Household">Household</option>
+                    <option value="Other">Other</option>
+                </select>
 
-            <button onClick={handleSubmit}>Submit</button>
-        </form>
-
+                <button type="submit" className={submitStyle}>Save</button>
+                </form>
     </div>
 );
 };
